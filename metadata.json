@@ -1,0 +1,6 @@
+{
+  "name": "QUARK ENERGY",
+  "description": "Plataforma de digitalização, estruturação e tokenização de empreendimentos de geração e armazenamento de energia. Conectando projetos de energia, tecnologia e capital para a transição energética.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

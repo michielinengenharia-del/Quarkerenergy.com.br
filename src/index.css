@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  body {
+    background-color: #020617;
+    color: #e2e8f0;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Immersive UI Glow effects */
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.glow-emerald-lg {
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.shadow-neon-emerald {
+  box-shadow: 0 0 10px #10b981;
+}
+
+.shadow-neon-blue {
+  box-shadow: 0 0 10px #3b82f6;
+}
+
+.shadow-dot-emerald {
+  box-shadow: 0 0 8px #10b981;
+}
+
+.shadow-dot-blue {
+  box-shadow: 0 0 8px #3b82f6;
+}
+
+/* Immersive Glass panels */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+.glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+}
