@@ -16,11 +16,13 @@ import {
 interface QuarkerJourneyProps {
   onOpenInvestorModal: () => void;
   onNavigateToPortal: () => void;
+  onNavigateToBessInvestor?: () => void;
 }
 
 export const QuarkerJourney: React.FC<QuarkerJourneyProps> = ({
   onOpenInvestorModal,
-  onNavigateToPortal
+  onNavigateToPortal,
+  onNavigateToBessInvestor
 }) => {
   const steps = [
     {
@@ -43,7 +45,7 @@ export const QuarkerJourney: React.FC<QuarkerJourneyProps> = ({
       num: 3,
       title: 'Analise',
       subtitle: 'Acesso a dados completos e riscos',
-      desc: 'Consulte o QUARK SCORE, modelagem de geração P50/P90, licenciamento ambiental, contratos de PPA e matriz de riscos técnicos.',
+      desc: 'Consulte a modelagem técnica de geração P50/P90, licenciamento ambiental, contratos de fornecimento e matriz de riscos técnicos.',
       icon: FileSearch,
       color: 'border-cyan-500/40 text-cyan-400 bg-cyan-500/10'
     },
@@ -171,15 +173,27 @@ export const QuarkerJourney: React.FC<QuarkerJourneyProps> = ({
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              id="btn-journey-quarker"
-              onClick={onOpenInvestorModal}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Sparkles className="w-4 h-4 text-slate-950" />
-              <span>QUERO SER UM QUARKER</span>
-              <ArrowRight className="w-4 h-4 text-slate-950" />
-            </button>
+            {onNavigateToBessInvestor ? (
+              <button
+                id="btn-journey-bess-investor"
+                onClick={onNavigateToBessInvestor}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-slate-950" />
+                <span>OPORTUNIDADE BESS (/investidor)</span>
+                <ArrowRight className="w-4 h-4 text-slate-950" />
+              </button>
+            ) : (
+              <button
+                id="btn-journey-quarker"
+                onClick={onOpenInvestorModal}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-slate-950" />
+                <span>QUERO SER UM QUARKER</span>
+                <ArrowRight className="w-4 h-4 text-slate-950" />
+              </button>
+            )}
 
             <button
               id="btn-journey-preview-portal"

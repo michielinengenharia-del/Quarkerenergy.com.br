@@ -12,6 +12,7 @@ import { initialFaqItems } from './data/initialData';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { CookieBanner } from './components/common/CookieBanner';
+import { WhatsAppButton } from './components/common/WhatsAppButton';
 
 // Landing Page Sections
 import { HeroSection } from './components/landing/HeroSection';
@@ -19,17 +20,17 @@ import { WhatIsQuark } from './components/landing/WhatIsQuark';
 import { QuarkerizeProject } from './components/landing/QuarkerizeProject';
 import { QuarkerJourney } from './components/landing/QuarkerJourney';
 import { WhyQuark } from './components/landing/WhyQuark';
-import { EsgSection } from './components/landing/EsgSection';
-import { QuarkScoreSection } from './components/landing/QuarkScoreSection';
-import { QuarkValuationSection } from './components/landing/QuarkValuationSection';
-import { FeaturedProjects } from './components/landing/FeaturedProjects';
 import { SecurityTrustSection } from './components/landing/SecurityTrustSection';
 import { FaqSection } from './components/landing/FaqSection';
+import { MenuDirectorySection } from './components/landing/MenuDirectorySection';
 
 // Page Views
 import { AboutUsView } from './components/about/AboutUsView';
 import { InvestorPortal } from './components/portal/InvestorPortal';
 import { AdminPanel } from './components/admin/AdminPanel';
+import { InvestorLandingPage } from './components/investor/InvestorLandingPage';
+import { SeuAtivoPage } from './components/seuativo/SeuAtivoPage';
+import { BessSalesPage } from './components/bess/BessSalesPage';
 
 // Modals
 import { QuarkerizeModal } from './components/modals/QuarkerizeModal';
@@ -37,9 +38,23 @@ import { InvestorRegistrationModal } from './components/modals/InvestorRegistrat
 import { ProjectDetailModal } from './components/modals/ProjectDetailModal';
 import { LgpdModal, LgpdTab } from './components/modals/LgpdModal';
 
+export type ViewType = 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess';
+
 export default function App() {
-  // Navigation View State
-  const [currentView, setCurrentView] = useState<'landing' | 'about' | 'portal' | 'admin'>('landing');
+  // Navigation View State initialized by URL path
+  const [currentView, setCurrentView] = useState<ViewType>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.startsWith('/bess') || hash === '#bess') return 'bess';
+      if (path.startsWith('/seuativo') || hash === '#seuativo') return 'seuativo';
+      if (path.startsWith('/investidor') || hash === '#investidor') return 'investor';
+      if (path.startsWith('/sobre') || hash === '#sobre') return 'about';
+      if (path.startsWith('/portal') || hash === '#portal') return 'portal';
+      if (path.startsWith('/admin') || hash === '#admin') return 'admin';
+    }
+    return 'landing';
+  });
 
   // Modal States
   const [isQuarkerizeOpen, setIsQuarkerizeOpen] = useState(false);
@@ -69,15 +84,82 @@ export default function App() {
       reloadData();
     };
 
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.startsWith('/bess') || hash === '#bess') {
+        setCurrentView('bess');
+        document.title = 'BESS | Armazenamento de Energia | Quark Energy';
+      } else if (path.startsWith('/seuativo') || hash === '#seuativo') {
+        setCurrentView('seuativo');
+        document.title = 'Quark Energy | Quarkerize seu ativo energético';
+      } else if (path.startsWith('/investidor') || hash === '#investidor') {
+        setCurrentView('investor');
+        document.title = 'Investidor BESS | Torne-se um Quarker | QUARK ENERGY';
+      } else if (path.startsWith('/sobre')) {
+        setCurrentView('about');
+        document.title = 'Sobre Nós | QUARK ENERGY';
+      } else if (path.startsWith('/portal')) {
+        setCurrentView('portal');
+        document.title = 'Área do Quarker | QUARK ENERGY';
+      } else if (path.startsWith('/admin')) {
+        setCurrentView('admin');
+        document.title = 'Painel CMS | QUARK ENERGY';
+      } else {
+        setCurrentView('landing');
+        document.title = 'QUARK ENERGY | A nova infraestrutura digital da economia energética';
+      }
+    };
+
     window.addEventListener('quark_storage_updated', handleStorageUpdated);
+    window.addEventListener('popstate', handlePopState);
     return () => {
       window.removeEventListener('quark_storage_updated', handleStorageUpdated);
+      window.removeEventListener('popstate', handlePopState);
     };
   }, []);
 
-  // Navigation handler
-  const handleNavigateToView = (view: 'landing' | 'about' | 'portal' | 'admin') => {
+  // Navigation handler with URL sync
+  const handleNavigateToView = (view: ViewType) => {
     setCurrentView(view);
+    if (typeof window !== 'undefined') {
+      if (view === 'bess') {
+        if (window.location.pathname !== '/bess') {
+          window.history.pushState({ view: 'bess' }, '', '/bess');
+        }
+        document.title = 'BESS | Armazenamento de Energia | Quark Energy';
+      } else if (view === 'seuativo') {
+        if (window.location.pathname !== '/seuativo') {
+          window.history.pushState({ view: 'seuativo' }, '', '/seuativo');
+        }
+        document.title = 'Quark Energy | Quarkerize seu ativo energético';
+      } else if (view === 'investor') {
+        if (window.location.pathname !== '/investidor') {
+          window.history.pushState({ view: 'investor' }, '', '/investidor');
+        }
+        document.title = 'Investidor BESS | Torne-se um Quarker | QUARK ENERGY';
+      } else if (view === 'about') {
+        if (window.location.pathname !== '/sobre') {
+          window.history.pushState({ view: 'about' }, '', '/sobre');
+        }
+        document.title = 'Sobre Nós | QUARK ENERGY';
+      } else if (view === 'portal') {
+        if (window.location.pathname !== '/portal') {
+          window.history.pushState({ view: 'portal' }, '', '/portal');
+        }
+        document.title = 'Área do Quarker | QUARK ENERGY';
+      } else if (view === 'admin') {
+        if (window.location.pathname !== '/admin') {
+          window.history.pushState({ view: 'admin' }, '', '/admin');
+        }
+        document.title = 'Painel CMS | QUARK ENERGY';
+      } else {
+        if (window.location.pathname !== '/') {
+          window.history.pushState({ view: 'landing' }, '', '/');
+        }
+        document.title = 'QUARK ENERGY | A nova infraestrutura digital da economia energética';
+      }
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -105,7 +187,7 @@ export default function App() {
       </div>
       
       {/* Conditionally render Navbar for standard views */}
-      {currentView !== 'portal' && currentView !== 'admin' && (
+      {currentView !== 'portal' && currentView !== 'admin' && currentView !== 'bess' && (
         <Navbar 
           currentView={currentView}
           onNavigateToView={handleNavigateToView}
@@ -122,7 +204,6 @@ export default function App() {
             <HeroSection 
               onOpenQuarkerizeModal={() => setIsQuarkerizeOpen(true)}
               onOpenInvestorModal={() => setIsInvestorModalOpen(true)}
-              onExploreProjects={() => handleScrollTo('projetos-destaque')}
               onNavigateToView={handleNavigateToView}
               cms={cms}
             />
@@ -131,39 +212,33 @@ export default function App() {
             <WhatIsQuark 
               cms={cms}
               onOpenQuarkerizeModal={() => setIsQuarkerizeOpen(true)}
+              onOpenInvestorModal={() => setIsInvestorModalOpen(true)}
             />
 
             {/* Section 6: QUARKERIZE SEU PROJETO (5 Cards) */}
             <QuarkerizeProject 
               onOpenModal={() => setIsQuarkerizeOpen(true)}
+              onNavigateToSeuAtivo={() => handleNavigateToView('seuativo')}
             />
 
             {/* Section 7: COMO FUNCIONA PARA O QUARKER (7-Step Timeline) */}
             <QuarkerJourney 
               onOpenInvestorModal={() => setIsInvestorModalOpen(true)}
               onNavigateToPortal={() => handleNavigateToView('portal')}
+              onNavigateToBessInvestor={() => handleNavigateToView('investor')}
             />
 
             {/* Section 8: POR QUE QUARK? (6 Value Cards) */}
             <WhyQuark />
 
-            {/* Section 9: SEÇÃO ESG & QUARK ESG SCORE */}
-            <EsgSection cms={cms} />
-
-            {/* Section 10: QUARK SCORE (0 a 100 & 10 Dimensões) */}
-            <QuarkScoreSection />
-
-            {/* Section 11: QUARK VALUATION & Simulador FCD */}
-            <QuarkValuationSection />
-
-            {/* Section 12: PROJETOS EM DESTAQUE */}
-            <FeaturedProjects 
-              projects={projects}
-              onSelectProject={(proj) => setSelectedProject(proj)}
+            {/* Guia de Menus: Chamadas Simples, Diretas e Persuasivas com Botões */}
+            <MenuDirectorySection 
+              onNavigateToView={handleNavigateToView}
               onOpenInvestorModal={() => setIsInvestorModalOpen(true)}
+              onOpenQuarkerizeModal={() => setIsQuarkerizeOpen(true)}
             />
 
-            {/* Section 18: SEGURANÇA E CONFIANÇA */}
+            {/* Section: SEGURANÇA E CONFIANÇA */}
             <SecurityTrustSection />
 
             {/* Section 17: FAQ (14 Perguntas Estruturadas) */}
@@ -179,6 +254,7 @@ export default function App() {
         {currentView === 'about' && (
           <AboutUsView 
             onBackToHome={() => handleNavigateToView('landing')}
+            onNavigateToView={handleNavigateToView}
             onOpenQuarkerizeModal={() => setIsQuarkerizeOpen(true)}
             onOpenInvestorModal={() => setIsInvestorModalOpen(true)}
           />
@@ -204,10 +280,41 @@ export default function App() {
             onBackToHome={() => handleNavigateToView('landing')}
           />
         )}
+
+        {/* Section Nova: Landing Page de Alta Conversão BESS - /investidor */}
+        {currentView === 'investor' && (
+          <InvestorLandingPage
+            onBackToHome={() => handleNavigateToView('landing')}
+            onOpenQuarkerPortal={() => handleNavigateToView('portal')}
+            onOpenLgpdModal={(tab) => {
+              setLgpdTab(tab);
+              setIsLgpdOpen(true);
+            }}
+          />
+        )}
+
+        {/* Section Nova: Quarkerize Seu Ativo - /seuativo */}
+        {currentView === 'seuativo' && (
+          <SeuAtivoPage
+            onBackToHome={() => handleNavigateToView('landing')}
+            onOpenPortal={() => handleNavigateToView('portal')}
+            onOpenLgpdModal={(tab) => {
+              setLgpdTab(tab);
+              setIsLgpdOpen(true);
+            }}
+          />
+        )}
+
+        {/* Section Nova: Venda de Sistemas BESS - /bess */}
+        {currentView === 'bess' && (
+          <BessSalesPage
+            onBackToHome={() => handleNavigateToView('landing')}
+          />
+        )}
       </main>
 
       {/* Footer for Standard Views */}
-      {currentView !== 'portal' && currentView !== 'admin' && (
+      {currentView !== 'portal' && currentView !== 'admin' && currentView !== 'bess' && (
         <Footer 
           onNavigateToView={handleNavigateToView}
           onOpenQuarkerizeModal={() => setIsQuarkerizeOpen(true)}
@@ -256,6 +363,9 @@ export default function App() {
         onClose={() => setIsLgpdOpen(false)}
         onTabChange={(tab) => setLgpdTab(tab)}
       />
+
+      {/* Floating WhatsApp Action Button */}
+      <WhatsAppButton />
 
     </div>
   );

@@ -10,21 +10,42 @@ import {
   Users, 
   TrendingUp,
   ArrowRight,
-  CheckCircle2
+  BatteryCharging,
+  Sliders,
+  HelpCircle,
+  Briefcase
 } from 'lucide-react';
 import { QuarkLogo } from '../common/Logo';
 
 interface AboutUsViewProps {
   onBackToHome: () => void;
-  onOpenQuarkerizeModal: () => void;
-  onOpenInvestorModal: () => void;
+  onNavigateToView?: (view: 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess') => void;
+  onOpenQuarkerizeModal?: () => void;
+  onOpenInvestorModal?: () => void;
 }
 
 export const AboutUsView: React.FC<AboutUsViewProps> = ({
   onBackToHome,
+  onNavigateToView,
   onOpenQuarkerizeModal,
   onOpenInvestorModal
 }) => {
+  const navigate = (view: 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess') => {
+    if (typeof onNavigateToView === 'function') {
+      onNavigateToView(view);
+    } else if (view === 'landing') {
+      onBackToHome();
+    }
+  };
+
+  const scrollToFaq = () => {
+    navigate('landing');
+    setTimeout(() => {
+      const el = document.getElementById('faq-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   const values = [
     {
       title: 'Inovação Responsável',
@@ -81,7 +102,7 @@ export const AboutUsView: React.FC<AboutUsViewProps> = ({
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
         
         {/* Origin / Concept Story */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -170,31 +191,100 @@ export const AboutUsView: React.FC<AboutUsViewProps> = ({
           </div>
         </div>
 
-        {/* Dual Actions CTA */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#09162e] via-slate-900 to-[#091b2c] border border-slate-800 text-center space-y-6 shadow-2xl">
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-            Faça parte da transição energética.
-          </h3>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
-            Seja cadastrando um empreendimento para estruturação ou participando como QUARKER, nossa equipe está pronta para atendê-lo.
-          </p>
+        {/* CTAs Direcionando para os outros Menus */}
+        <div className="space-y-6 pt-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-wider">
+              Conecte-se aos nossos ecossistemas
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              Explore as soluções e oportunidades da Quark
+            </h2>
+            <p className="text-slate-300 text-sm">
+              Escolha o caminho que melhor atende ao seu perfil e descubra o futuro da energia:
+            </p>
+          </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={onOpenQuarkerizeModal}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>QUARKERIZE SEU PROJETO</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* CTA 1: Investidor BESS */}
+            <div className="p-6 rounded-2xl bg-slate-900/70 border border-cyan-500/30 hover:border-cyan-400/80 transition-all flex flex-col justify-between group shadow-xl">
+              <div>
+                <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 w-fit mb-4 group-hover:scale-105 transition-transform">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-white mb-1.5">Investidor BESS</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Invista no futuro do armazenamento de energia. Conheça nossos planos comerciais com retornos estruturados.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate('investor')}
+                className="mt-6 w-full py-2.5 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <span>ACESSAR INVESTIDOR BESS</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
 
-            <button
-              onClick={onOpenInvestorModal}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>QUERO SER UM QUARKER</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            {/* CTA 2: Comprar BESS */}
+            <div className="p-6 rounded-2xl bg-slate-900/70 border border-blue-500/30 hover:border-blue-400/80 transition-all flex flex-col justify-between group shadow-xl">
+              <div>
+                <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 w-fit mb-4 group-hover:scale-105 transition-transform">
+                  <BatteryCharging className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-white mb-1.5">Comprar BESS</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Dimensione um sistema de armazenamento para sua empresa e reduza custos na ponta com a Black Energy.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate('bess')}
+                className="mt-6 w-full py-2.5 px-4 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <span>COMPRAR MEU BESS</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* CTA 3: Recursos Para Seu Ativo */}
+            <div className="p-6 rounded-2xl bg-slate-900/70 border border-emerald-500/30 hover:border-emerald-400/80 transition-all flex flex-col justify-between group shadow-xl">
+              <div>
+                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit mb-4 group-hover:scale-105 transition-transform">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-emerald-400 mb-1.5">Recursos Para Seu Ativo</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Seu ativo pode ser maior com o capital certo. Conecte sua usina ou projeto ao capital inteligente.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate('seuativo')}
+                className="mt-6 w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <span>QUARKERIZAR ATIVO</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* CTA 4: Dúvidas & FAQ */}
+            <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-700/60 hover:border-slate-500 transition-all flex flex-col justify-between group shadow-xl">
+              <div>
+                <div className="p-3 rounded-xl bg-slate-800 text-slate-300 w-fit mb-4 group-hover:scale-105 transition-transform">
+                  <HelpCircle className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-white mb-1.5">Dúvidas & FAQ</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Consulte respostas técnicas sobre o modelo de negócio, governança, segurança jurídica e funcionamento.
+                </p>
+              </div>
+              <button
+                onClick={scrollToFaq}
+                className="mt-6 w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer border border-slate-700"
+              >
+                <span>VER PERGUNTAS FREQUENTES</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 

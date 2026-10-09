@@ -2,7 +2,6 @@ import React from 'react';
 import { QuarkParticleCanvas } from '../common/QuarkParticleCanvas';
 import { 
   Sparkles, 
-  ArrowRight, 
   Sun, 
   Droplets, 
   BatteryCharging, 
@@ -16,15 +15,14 @@ interface HeroSectionProps {
   cms: CmsContent;
   onOpenQuarkerizeModal: () => void;
   onOpenInvestorModal: () => void;
-  onExploreProjects?: () => void;
-  onNavigateToView?: (view: 'landing' | 'about' | 'portal' | 'admin') => void;
+  onNavigateToView?: (view: 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess') => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   cms,
   onOpenQuarkerizeModal,
   onOpenInvestorModal,
-  onExploreProjects
+  onNavigateToView
 }) => {
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-20 overflow-hidden bg-[#020617]">
@@ -76,18 +74,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* CTA 1: Empreendedor */}
             <button
               id="hero-btn-quarkerize"
-              onClick={onOpenQuarkerizeModal}
+              onClick={() => {
+                if (typeof onNavigateToView === 'function') {
+                  onNavigateToView('seuativo');
+                } else {
+                  onOpenQuarkerizeModal();
+                }
+              }}
               className="group relative px-8 py-4 bg-emerald-500 text-slate-950 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2.5 cursor-pointer text-sm tracking-wide"
             >
               <Sparkles className="w-4 h-4 text-slate-950" />
-              <span>QUARKERIZE SEU PROJETO</span>
+              <span>QUARKERIZE SEU ATIVO</span>
               <div className="absolute inset-0 rounded-xl border border-white/20 group-hover:border-white/40 pointer-events-none" />
             </button>
 
             {/* CTA 2: Investidor */}
             <button
               id="hero-btn-investor"
-              onClick={onOpenInvestorModal}
+              onClick={() => {
+                if (typeof onNavigateToView === 'function') {
+                  onNavigateToView('investor');
+                } else {
+                  onOpenInvestorModal();
+                }
+              }}
               className="px-8 py-4 bg-slate-900 border border-slate-700 text-white rounded-xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer shadow-lg text-sm tracking-wide"
             >
               <Zap className="w-4 h-4 text-cyan-400" />
@@ -106,8 +116,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <div className="text-[10px] uppercase tracking-wider text-slate-500 font-mono mt-0.5">Ativos Estruturados</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-white font-mono">100% ESG</div>
-              <div className="text-[10px] uppercase tracking-wider text-slate-500 font-mono mt-0.5">Impacto Positivo</div>
+              <div className="text-2xl sm:text-3xl font-bold text-white font-mono">100% Limpa</div>
+              <div className="text-[10px] uppercase tracking-wider text-slate-500 font-mono mt-0.5">Transição Energética</div>
             </div>
           </div>
 
@@ -123,7 +133,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Metodologia QUARK ESG SCORE</span>
+              <span>Armazenamento & Sistemas BESS</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -184,7 +194,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <Zap className="w-5 h-5" />
                 </div>
                 <h4 className="text-white font-semibold text-sm">Biomassa & Biogás</h4>
-                <p className="text-xs text-slate-400 mt-1">Economia circular, biometano e créditos de carbono</p>
+                <p className="text-xs text-slate-400 mt-1">Economia circular, biometano e geração distribuída</p>
               </div>
 
             </div>
@@ -195,15 +205,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <Database className="w-4 h-4 text-emerald-400" />
                 <span>Modelagem Técnica P50/P90 • Auditoria de Pareceres de Acesso • Rastreabilidade Criptográfica</span>
               </div>
-              {onExploreProjects && (
-                <button 
-                  onClick={onExploreProjects}
-                  className="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1 cursor-pointer"
-                >
-                  Explorar Ativos Demonstrativos
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              )}
             </div>
 
           </div>

@@ -49,7 +49,7 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
       icon: SearchCheck,
       color: 'from-cyan-500 to-blue-600',
       tag: 'Diligência',
-      desc: 'Auditoria técnica multidisciplinar, cálculo de P50/P90, análise de risco regulatório e pontuação no QUARK SCORE.'
+      desc: 'Auditoria técnica multidisciplinar, cálculo de P50/P90, análise de risco regulatório e pareceres técnicos de engenharia.'
     },
     {
       id: 3,
@@ -73,7 +73,7 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
       icon: Users,
       color: 'from-emerald-400 to-cyan-500',
       tag: 'Democratização',
-      desc: 'O QUARKER acessa oportunidades antes restritas a fundos institucionais, com transparência contínua e relatórios ESG.'
+      desc: 'O QUARKER acessa oportunidades antes restritas a fundos institucionais, com transparência contínua e governança corporativa.'
     }
   ];
 
@@ -222,10 +222,10 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
           <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/30 transition-all">
             <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-              Transparência Algorítmica
+              Transparência & Diligência
             </h3>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Através do QUARK SCORE e do QUARK ESG SCORE, transformamos centenas de páginas de laudos e contratos em métricas compreensíveis e auditáveis pelo investidor.
+              Transformamos centenas de páginas de laudos e contratos em métricas compreensíveis, dados consolidados e informações auditáveis para os participantes.
             </p>
           </div>
 

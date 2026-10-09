@@ -49,9 +49,9 @@ export const WhyQuark: React.FC = () => {
       borderHover: 'hover:border-indigo-500/40'
     },
     {
-      title: 'ESG',
-      subtitle: 'Impacto Positivo Mensurado',
-      desc: 'Critérios ambientais, sociais e de governança integrados nativamente. Cálculo de emissões de carbono evitadas e auditoria de conformidade socioambiental.',
+      title: 'TRANSIÇÃO LIMPA',
+      subtitle: 'Impacto Real e Renovável',
+      desc: 'Foco exclusivo em fontes renováveis e armazenamento estratégico, contribuindo ativamente para a modernização e descarbonização da matriz energética nacional.',
       icon: Leaf,
       gradient: 'from-emerald-500/20 to-teal-500/20',
       iconColor: 'text-emerald-400',

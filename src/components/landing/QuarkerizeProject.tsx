@@ -14,9 +14,13 @@ import {
 
 interface QuarkerizeProjectProps {
   onOpenModal: () => void;
+  onNavigateToSeuAtivo?: () => void;
 }
 
-export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({ onOpenModal }) => {
+export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({ 
+  onOpenModal,
+  onNavigateToSeuAtivo 
+}) => {
   const steps = [
     {
       num: '01',
@@ -187,10 +191,10 @@ export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({ onOpenModa
 
               <button
                 id="btn-quarkerize-cta-box"
-                onClick={onOpenModal}
+                onClick={onNavigateToSeuAtivo || onOpenModal}
                 className="w-full py-4 px-6 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>QUARKERIZE SEU PROJETO</span>
+                <span>QUARKERIZE SEU ATIVO</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -199,6 +203,36 @@ export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({ onOpenModa
               </p>
             </div>
 
+          </div>
+        </div>
+
+        {/* Bloco Especial na Homepage: TEM UM ATIVO ENERGÉTICO? QUARKERIZE SEU PRODUTO */}
+        <div className="mt-8 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-emerald-950/60 via-[#071329] to-cyan-950/60 border-2 border-emerald-500/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-left">
+            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest block">
+              TEM UM ATIVO ENERGÉTICO?
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              QUARKERIZE SEU PRODUTO
+            </h3>
+            <p className="text-slate-300 text-sm max-w-xl leading-relaxed">
+              “Transforme seu ativo em uma oportunidade estruturada para captar recursos e conquistar novos clientes.”
+            </p>
+            <p className="text-xs text-slate-400 font-mono">
+              Você tem o ativo. Nós ajudamos a conectar capital, investidores e mercado.
+            </p>
+          </div>
+
+          <div className="shrink-0 w-full md:w-auto">
+            <button
+              id="btn-home-quarkerize-produto"
+              onClick={onNavigateToSeuAtivo || onOpenModal}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 font-black text-sm uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>QUERO QUARKERIZAR</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 

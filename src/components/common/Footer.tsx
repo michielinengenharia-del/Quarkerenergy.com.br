@@ -3,18 +3,22 @@ import { QuarkLogo } from './Logo';
 import { 
   ShieldAlert, 
   Mail, 
-  Phone, 
   MapPin, 
   ArrowUpRight, 
   FileCheck, 
-  CheckCircle2, 
   Lock,
-  Globe
+  Globe,
+  UserCheck,
+  Sliders,
+  BatteryCharging,
+  Zap,
+  TrendingUp,
+  Briefcase
 } from 'lucide-react';
 
 interface FooterProps {
   onOpenLgpdModal?: (tab: 'privacy' | 'terms' | 'cookies' | 'rights') => void;
-  onNavigateToView?: (view: 'landing' | 'about' | 'portal' | 'admin') => void;
+  onNavigateToView?: (view: 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess') => void;
   onOpenQuarkerizeModal?: () => void;
   onOpenInvestorModal?: () => void;
   // Backward compatibility props
@@ -25,30 +29,13 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({
   onOpenLgpdModal,
   onNavigateToView,
-  onOpenQuarkerizeModal,
-  onOpenInvestorModal,
-  onNavigate,
-  onOpenQuarkerize
+  onNavigate
 }) => {
-  const navigate = (view: 'landing' | 'about' | 'portal' | 'admin') => {
+  const navigate = (view: 'landing' | 'about' | 'portal' | 'admin' | 'investor' | 'seuativo' | 'bess') => {
     if (typeof onNavigateToView === 'function') {
       onNavigateToView(view);
     } else if (typeof onNavigate === 'function') {
       onNavigate(view === 'landing' ? 'home' : view);
-    }
-  };
-
-  const handleOpenQuarkerize = () => {
-    if (typeof onOpenQuarkerizeModal === 'function') {
-      onOpenQuarkerizeModal();
-    } else if (typeof onOpenQuarkerize === 'function') {
-      onOpenQuarkerize();
-    }
-  };
-
-  const handleOpenInvestor = () => {
-    if (typeof onOpenInvestorModal === 'function') {
-      onOpenInvestorModal();
     }
   };
 
@@ -70,6 +57,43 @@ export const Footer: React.FC<FooterProps> = ({
     <footer id="main-footer" className="bg-[#050912] border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Highlight Banner: Área do Quarker e CMS no Rodapé */}
+        <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800/90 flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-md">
+          <div className="space-y-1 text-center md:text-left">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+              Acesso Exclusivo & Governança
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold text-white">
+              Portais da Plataforma Quark Energy
+            </h3>
+            <p className="text-xs text-slate-400 max-w-xl">
+              Consulte seu painel de participação e investimentos ou acesse as ferramentas administrativas do sistema.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            {/* Botão Área do Quarker */}
+            <button
+              id="footer-area-do-quarker"
+              onClick={() => navigate('portal')}
+              className="px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-950/80 to-blue-950/80 border border-cyan-500/40 text-cyan-300 hover:text-white hover:border-cyan-400 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-cyan-500/20"
+            >
+              <UserCheck className="w-4 h-4 text-cyan-400" />
+              <span>ÁREA DO QUARKER</span>
+            </button>
+
+            {/* Botão CMS Admin */}
+            <button
+              id="footer-cms-admin"
+              onClick={() => navigate('admin')}
+              className="px-5 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-slate-300 hover:text-emerald-300 hover:border-emerald-500/40 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg"
+            >
+              <Sliders className="w-4 h-4 text-emerald-400" />
+              <span>PAINEL CMS</span>
+            </button>
+          </div>
+        </div>
+
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/60">
           
@@ -80,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({
               A nova infraestrutura digital da economia energética.
             </p>
             <p className="text-slate-400 text-xs leading-relaxed max-w-md">
-              Conectamos empreendimentos energéticos de ativos reais a novas fontes de capital através de rigorosa análise de engenharia, governança, dados auditáveis e critérios ESG.
+              Conectamos empreendimentos energéticos e tecnologia de armazenamento BESS através de rigorosa análise de engenharia, governança e dados auditáveis.
             </p>
 
             <div className="pt-2 flex flex-col space-y-2 text-xs text-slate-400">
@@ -99,50 +123,34 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Links: Ecossistema */}
+          {/* Links: A Quark */}
           <div>
             <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">
-              Ecossistema
+              A Quark
             </h4>
             <ul className="space-y-2.5 text-xs">
-              <li>
-                <button 
-                  onClick={() => navigate('about')} 
-                  className="hover:text-emerald-400 transition-colors cursor-pointer"
-                >
-                  Sobre a QUARK ENERGY
-                </button>
-              </li>
               <li>
                 <button 
                   onClick={() => scrollTo('o-que-e')} 
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
-                  Como Funciona o Modelo
+                  O que é a QUARK
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => scrollTo('projetos-destaque')} 
+                  onClick={() => navigate('about')} 
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
-                  Projetos em Destaque
+                  Sobre a Empresa
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => scrollTo('secao-esg')} 
+                  onClick={() => scrollTo('seguranca-governanca')} 
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
-                  Critérios ESG & Impacto
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollTo('quark-score-section')} 
-                  className="hover:text-emerald-400 transition-colors cursor-pointer"
-                >
-                  QUARK SCORE & Valuation
+                  Segurança & Governança
                 </button>
               </li>
               <li>
@@ -156,58 +164,61 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Links: Acesso & Ações */}
+          {/* Links: Oportunidades & BESS */}
           <div>
             <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">
-              Acesso & Portais
+              Oportunidades & Soluções
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
                 <button 
-                  onClick={handleOpenQuarkerize} 
-                  className="text-emerald-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
+                  onClick={() => scrollTo('como-funciona-quarker')} 
+                  className="hover:text-cyan-400 transition-colors cursor-pointer flex items-center gap-1.5"
                 >
-                  QUARKERIZE seu Projeto
-                  <ArrowUpRight className="w-3 h-3" />
+                  <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
+                  Para Investidores
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={handleOpenInvestor} 
+                  onClick={() => scrollTo('quarkerize-secao')} 
+                  className="hover:text-emerald-400 transition-colors cursor-pointer flex items-center gap-1.5"
+                >
+                  <Briefcase className="w-3.5 h-3.5 text-emerald-400" />
+                  Para Empreendedores
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => navigate('investor')} 
                   className="text-cyan-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                 >
-                  Seja um QUARKER
+                  Investidor BESS (/investidor)
                   <ArrowUpRight className="w-3 h-3" />
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => navigate('portal')} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  onClick={() => navigate('bess')} 
+                  className="text-cyan-300 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                 >
-                  Área do QUARKER (Dashboard)
+                  Comprar BESS (/bess)
+                  <ArrowUpRight className="w-3 h-3" />
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => navigate('admin')} 
-                  className="hover:text-white transition-colors cursor-pointer text-slate-500 hover:text-emerald-300"
+                  onClick={() => navigate('seuativo')} 
+                  className="text-emerald-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                 >
-                  Painel CMS Admin
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollTo('seguranca-governanca')} 
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Tecnologia & Governança
+                  Recursos Para Seu Ativo (/seuativo)
+                  <ArrowUpRight className="w-3 h-3" />
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Links: Legal & LGPD */}
+          {/* Links: Jurídico & LGPD */}
           <div>
             <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">
               Jurídico & LGPD
@@ -257,12 +268,12 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* Immersive UI Protocol & ESG Pillars Strip */}
+        {/* Clean Infrastructure & Technology Strip */}
         <div className="mt-10 py-6 px-6 rounded-2xl bg-slate-950/60 border border-slate-800/50 backdrop-blur-lg flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col gap-1 w-full md:w-auto">
             <div className="flex items-center gap-2.5">
               <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></div>
-              <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></div>
+              <div className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></div>
               <div className="w-2 h-2 rounded-full bg-slate-600"></div>
               <span className="text-[10px] text-slate-400 font-mono ml-1">PLATAFORMA ATIVA</span>
             </div>
@@ -271,16 +282,22 @@ export const Footer: React.FC<FooterProps> = ({
 
           <div className="flex flex-wrap gap-8 justify-center items-center">
             <div className="flex flex-col">
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">ESG PILAR E</span>
-              <span className="text-xs text-slate-200 font-bold">Transição Energética</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">INFRAESTRUTURA</span>
+              <span className="text-xs text-slate-200 font-bold flex items-center gap-1">
+                <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                Geração & Armazenamento
+              </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">ESG PILAR S</span>
-              <span className="text-xs text-slate-200 font-bold">Impacto Regional</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">TECNOLOGIA</span>
+              <span className="text-xs text-slate-200 font-bold flex items-center gap-1">
+                <BatteryCharging className="w-3.5 h-3.5 text-cyan-400" />
+                Sistemas BESS Inteligentes
+              </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">ESG PILAR G</span>
-              <span className="text-xs text-slate-200 font-bold">Diligência & Dados</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-0.5">GOVERNANÇA</span>
+              <span className="text-xs text-slate-200 font-bold">Diligência & Dados Auditáveis</span>
             </div>
           </div>
 
@@ -289,7 +306,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Regulatory Disclaimer Warning Box (Mandatory & Rigorous) */}
+        {/* Regulatory Disclaimer Warning Box */}
         <div className="mt-6 p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs leading-relaxed text-slate-400">
           <div className="flex items-start gap-3">
             <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />

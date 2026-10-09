@@ -92,6 +92,10 @@ export interface QuarkerInvestor {
   marketingConsent: boolean;
   walletSimulatedBalance?: number;
   portfolioCount?: number;
+  selectedPlan?: string;
+  simulatedAmount?: number;
+  origin?: string;
+  notes?: string;
 }
 
 export interface ProjectLead {
@@ -121,6 +125,11 @@ export interface ProjectLead {
   crmStatus: 'Novo' | 'Contatado' | 'Qualificado' | 'Em Análise' | 'Convertido';
   priority: 'Alta' | 'Média' | 'Normal';
   notes?: string;
+  hasExistingInvestors?: boolean | string;
+  seekingGoals?: string[];
+  approximateAssetValue?: string;
+  fundraisingTarget?: string;
+  origin?: string;
 }
 
 export interface CmsContent {
