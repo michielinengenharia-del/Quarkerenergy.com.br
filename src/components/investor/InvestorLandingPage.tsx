@@ -155,6 +155,36 @@ const FAQS = [
   }
 ];
 
+const PROSPECT_ASSETS = [
+  {
+    id: 'bess-003',
+    name: 'QUARK BESS STORAGE 003 — Capacidade 114 kWh / 57,0 kW',
+    shortName: 'BESS 003 (114 kWh / 57,0 kW)',
+    tag: 'BESS 003 • 114 kWh / 57,0 kW',
+    type: 'Armazenamento em Baterias (BESS)',
+    returnText: '1,50% a.m.',
+    scheduleText: '06 a 12 meses'
+  },
+  {
+    id: 've-004',
+    name: 'QUARK ESTAÇÃO DE RECARGA VE 004 — 40,0 kW CC',
+    shortName: 'Recarga VE 004 (40,0 kW CC)',
+    tag: 'Recarga VE 004 • 40,0 kW CC',
+    type: 'Eletromobilidade (Hub de Recarga CC)',
+    returnText: '1,5% a.m.',
+    scheduleText: '06 a 12 meses'
+  },
+  {
+    id: 'ambos',
+    name: 'Ambos os Ativos / Diversificação (BESS + Recarga VE)',
+    shortName: 'Ambos os Ativos (Diversificação)',
+    tag: 'Ambos os Ativos (Diversificação)',
+    type: 'Mix de Ativos em Prospecção',
+    returnText: '~1,5% a.m.',
+    scheduleText: '06 a 12 meses'
+  }
+];
+
 export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
   onBackToHome,
   onOpenQuarkerPortal
@@ -163,6 +193,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PlanItem>(PLANS[1]); // Default Growth
   const [customAmount, setCustomAmount] = useState<number>(PLANS[1].valueNumeric);
+  const [selectedAssetId, setSelectedAssetId] = useState<string>('bess-003');
 
   // Form states
   const [name, setName] = useState('');
@@ -179,9 +210,12 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
 
   const WHATSAPP_TARGET_NUMBER = '5549999771176';
 
-  const handleOpenPlanModal = (plan: PlanItem) => {
+  const handleOpenPlanModal = (plan: PlanItem, assetId?: string) => {
     setSelectedPlan(plan);
     setCustomAmount(plan.valueNumeric);
+    if (assetId) {
+      setSelectedAssetId(assetId);
+    }
     setFormError('');
     setIsSubmittedSuccess(false);
     setIsModalOpen(true);
@@ -220,13 +254,14 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
     }
 
     const calculatedQuotas = Math.max(1, Math.round(customAmount / 500));
+    const activeAsset = PROSPECT_ASSETS.find(a => a.id === selectedAssetId) || PROSPECT_ASSETS[0];
     const preferenceText = preferenceNote.trim() 
       ? preferenceNote.trim() 
       : 'Gostaria de conhecer os detalhes de rentabilidade e próximos passos para alocação.';
 
     // Montar texto profissional e claro para WhatsApp
     const messageLines = [
-      '⚡ *QUARK ENERGY — INTERESSE EM INVESTIMENTO BESS*',
+      '⚡ *QUARK ENERGY — INTERESSE EM INVESTIMENTO*',
       '',
       'Olá, equipe Quark Energy! Gostaria de investir no futuro da energia e me tornar um Quarker.',
       '',
@@ -235,6 +270,11 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
       `• *WhatsApp:* ${phone.trim()}`,
       `• *E-mail:* ${email.trim()}`,
       `• *Cidade/UF:* ${cityState.trim() || 'Não informada'}`,
+      '',
+      '🎯 *ATIVO EM PROSPECÇÃO DESEJADO:*',
+      `• *Ativo Escolhido:* ${activeAsset.name}`,
+      `• *Rentabilidade Projetada:* ${activeAsset.returnText}`,
+      `• *Cronograma Alvo:* ${activeAsset.scheduleText}`,
       '',
       '💼 *PLANO SELECIONADO:*',
       `• *Plano:* ${selectedPlan.name}`,
@@ -261,7 +301,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
         state: cityState.split('/')[1]?.trim() || 'BR',
         investorProfile: customAmount >= 25000 ? 'Qualificado / Profissional' : customAmount >= 5000 ? 'Arrojado' : 'Moderado',
         investmentRange: customAmount >= 50000 ? 'R$ 50 mil – R$ 250 mil' : customAmount >= 10000 ? 'R$ 10 mil – R$ 50 mil' : 'Até R$ 10 mil',
-        interests: ['BESS'],
+        interests: ['BESS', 'Híbrido'],
         investmentHorizon: 'Médio prazo (1 a 3 anos)',
         experience: 'Intermediário',
         registeredAt: new Date().toISOString().split('T')[0],
@@ -273,7 +313,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
         walletSimulatedBalance: customAmount,
         portfolioCount: 1,
         origin: 'Página Investidor BESS (/investidor)',
-        notes: `Plano: ${selectedPlan.name}. Valor pretendido: R$ ${customAmount.toLocaleString('pt-BR')}. Preferência: ${preferenceText}`
+        notes: `Ativo Desejado: ${activeAsset.name}. Plano: ${selectedPlan.name}. Valor pretendido: R$ ${customAmount.toLocaleString('pt-BR')}. Preferência: ${preferenceText}`
       };
       StorageService.addQuarker(newQuarker);
     } catch {
@@ -561,7 +601,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
               </div>
 
               <button
-                onClick={() => handleOpenPlanModal(PLANS[1])}
+                onClick={() => handleOpenPlanModal(PLANS[1], 'bess-003')}
                 className="whitespace-nowrap px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
               >
                 <span>Quero Participar Deste Ativo</span>
@@ -597,7 +637,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
               </div>
 
               <button
-                onClick={() => handleOpenPlanModal(PLANS[0])}
+                onClick={() => handleOpenPlanModal(PLANS[0], 've-004')}
                 className="whitespace-nowrap px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
               >
                 <span>Quero Participar Deste Ativo</span>
@@ -787,6 +827,56 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
                     </div>
                   </div>
 
+                  {/* NOVO CAMPO: Ativo em Prospecção Desejado */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                        Qual Ativo em Prospecção Deseja Participar? *
+                      </label>
+                      <span className="text-[10px] text-slate-500 font-mono">Seleção de Ativo</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      {PROSPECT_ASSETS.map((asset) => {
+                        const isSelected = selectedAssetId === asset.id;
+                        return (
+                          <div
+                            key={asset.id}
+                            onClick={() => setSelectedAssetId(asset.id)}
+                            className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                              isSelected
+                                ? 'bg-cyan-950/30 border-cyan-400/80 shadow-md shadow-cyan-950/40 text-white'
+                                : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                            }`}
+                          >
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center shrink-0 ${
+                                  isSelected ? 'border-cyan-400 bg-cyan-400' : 'border-slate-600'
+                                }`}>
+                                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-slate-950"></span>}
+                                </span>
+                                <span className="text-xs font-bold truncate text-white">
+                                  {asset.name}
+                                </span>
+                              </div>
+                              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 pl-5 text-[11px] text-slate-400">
+                                <span>Rentabilidade: <strong className="text-emerald-400">{asset.returnText}</strong></span>
+                                <span>•</span>
+                                <span>Cronograma: <strong className="text-cyan-300">{asset.scheduleText}</strong></span>
+                              </div>
+                            </div>
+                            {isSelected && (
+                              <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold shrink-0 px-2 py-0.5 rounded bg-cyan-950 border border-cyan-800/40">
+                                Selecionado
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   {/* Valor e Cotas Estimadas */}
                   <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs">
                     <div>
@@ -914,7 +1004,7 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
                   </h4>
 
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto">
-                    A mensagem foi gerada e enviada para o WhatsApp da equipe Quark Energy com os dados do seu plano escolhido: <strong>{selectedPlan.name}</strong>.
+                    A mensagem foi gerada e enviada para o WhatsApp da equipe Quark Energy com seu plano <strong>{selectedPlan.name}</strong> e o ativo de interesse: <strong>{(PROSPECT_ASSETS.find(a => a.id === selectedAssetId) || PROSPECT_ASSETS[0]).shortName || (PROSPECT_ASSETS.find(a => a.id === selectedAssetId) || PROSPECT_ASSETS[0]).name}</strong>.
                   </p>
 
                   <div className="pt-2 flex flex-col gap-2">
