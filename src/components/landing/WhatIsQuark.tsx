@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Building2, 
   Layers, 
   SearchCheck, 
-  FileSpreadsheet, 
   Cpu, 
   Users, 
-  ArrowRight, 
-  CheckCircle2, 
-  Sparkles,
-  ShieldAlert
+  ArrowRight
 } from 'lucide-react';
 import { CmsContent } from '../../types';
 
@@ -29,51 +24,39 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
   const flowSteps = [
     {
       id: 0,
-      title: 'EMPREENDEDOR',
-      icon: Building2,
+      stepNumber: '01',
+      title: 'ATIVO REAL (PROJETO)',
+      tag: '01 • Originação & Projeto',
+      icon: Layers,
       color: 'from-emerald-500 to-teal-600',
-      tag: 'Originação',
-      desc: 'Desenvolvedores e proprietários apresentam ativos de geração (solar, CGH, PCH, biogás) e armazenamento BESS.'
+      desc: 'Mapeamento e identificação de ativos concretos de geração renovável (solar, CGH, PCH, biogás) e armazenamento em baterias (BESS) com outorgas, pareceres de acesso e documentação preliminar.'
     },
     {
       id: 1,
-      title: 'PROJETO',
-      icon: Layers,
+      stepNumber: '02',
+      title: 'DILIGÊNCIA (ANÁLISE)',
+      tag: '02 • Diligência Multidisciplinar',
+      icon: SearchCheck,
       color: 'from-teal-500 to-cyan-600',
-      tag: 'Ativo Real',
-      desc: 'Reunião de documentação fundiária, pareceres de conexão à concessionária, outorgas ANEEL e estudos ambientais.'
+      desc: 'Auditoria técnica multidisciplinar de engenharia, checagem fundiária, análise de riscos regulatórios ANEEL, cálculo de curva de geração/despacho e viabilidade econômica detalhada.'
     },
     {
       id: 2,
-      title: 'ANÁLISE',
-      icon: SearchCheck,
+      stepNumber: '03',
+      title: 'DIGITALIZAÇÃO (ESTRUTURAÇÃO JURIDICA E COTAS)',
+      tag: '03 • Estruturação Jurídica & Cotas',
+      icon: Cpu,
       color: 'from-cyan-500 to-blue-600',
-      tag: 'Diligência',
-      desc: 'Auditoria técnica multidisciplinar, cálculo de P50/P90, análise de risco regulatório e pareceres técnicos de engenharia.'
+      desc: 'Estruturação societária customizada (SPEs, debêntures, frações de PPA) com segregação de risco patrimonial e digitalização dos direitos econômicos em cotas auditáveis e transparentes.'
     },
     {
       id: 3,
-      title: 'ESTRUTURAÇÃO',
-      icon: FileSpreadsheet,
-      color: 'from-blue-500 to-indigo-600',
-      tag: 'Jurídico & Financeiro',
-      desc: 'Definição do veículo financeiro adequado (SPE, debêntures, CCBs, frações de PPA) com segregação de risco e governança.'
-    },
-    {
-      id: 4,
-      title: 'TOKENIZAÇÃO',
-      icon: Cpu,
-      color: 'from-indigo-500 to-purple-600',
-      tag: 'Digitalização',
-      desc: 'Quando aplicável e estritamente regulamentado, direitos econômicos são representados em registros digitais auditáveis.'
-    },
-    {
-      id: 5,
-      title: 'INVESTIDOR',
+      stepNumber: '04',
+      title: 'DEMOCRATIZAÇÃO (CAPTAÇÃO COTISTAS INVESTIDORES)',
+      tag: '04 • Captação Cotistas Investidores',
       icon: Users,
-      color: 'from-emerald-400 to-cyan-500',
-      tag: 'Democratização',
-      desc: 'O QUARKER acessa oportunidades antes restritas a fundos institucionais, com transparência contínua e governança corporativa.'
+      color: 'from-blue-500 to-indigo-600',
+      desc: 'Abertura da captação para cotistas investidores (Quarkers), democratizando o acesso a empreendimentos energéticos de alta rentabilidade com distribuição periódica de resultados e governança contínua.'
     }
   ];
 
@@ -107,17 +90,17 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
                 <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider uppercase">
                   Fluxo Proprietário de Conexão
                 </span>
-                <h3 className="text-xl font-bold text-white mt-0.5">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mt-0.5">
                   Do Projeto Bruto ao Ativo Estruturado
                 </h3>
               </div>
               <p className="text-xs text-slate-400 max-w-md text-right hidden md:block">
-                Clique nas etapas abaixo para examinar os mecanismos de checagem, validação e governança de cada estágio.
+                Clique nas 4 etapas abaixo para examinar os mecanismos de diligência, estruturação e governança de cada estágio.
               </p>
             </div>
 
-            {/* Step Badges Row (Interactive) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {/* Step Badges Row (Interactive 4 Steps) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {flowSteps.map((step, idx) => {
                 const IconComponent = step.icon;
                 const isSelected = activeStep === idx;
@@ -125,32 +108,34 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
                   <button
                     key={step.id}
                     onClick={() => setActiveStep(idx)}
-                    className={`p-3.5 rounded-xl text-left transition-all border flex flex-col justify-between relative group cursor-pointer ${
+                    className={`p-4 rounded-2xl text-left transition-all border flex flex-col justify-between relative group cursor-pointer ${
                       isSelected
-                        ? 'bg-slate-800/90 border-emerald-500/60 shadow-lg shadow-emerald-500/10'
+                        ? 'bg-slate-800/90 border-emerald-500/70 shadow-lg shadow-emerald-500/15 ring-1 ring-emerald-500/40'
                         : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40'
                     }`}
                   >
                     <div className="flex items-center justify-between w-full mb-3">
-                      <div className={`p-2 rounded-lg bg-gradient-to-br ${step.color} text-white shadow-sm`}>
+                      <div className={`p-2.5 rounded-xl bg-gradient-to-br ${step.color} text-white shadow-sm`}>
                         <IconComponent className="w-4 h-4" />
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-slate-500">
-                        0{idx + 1}
+                      <span className="text-xs font-mono font-bold text-emerald-400">
+                        {step.stepNumber}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-mono text-emerald-400/90 block font-medium">
+                      <span className="text-[10px] uppercase font-mono text-slate-400 block font-semibold mb-1">
                         {step.tag}
                       </span>
-                      <h4 className="text-xs font-bold text-white tracking-wide mt-0.5">
+                      <h4 className="text-xs sm:text-sm font-bold text-white tracking-wide leading-snug">
                         {step.title}
                       </h4>
                     </div>
 
                     {idx < flowSteps.length - 1 && (
-                      <div className="hidden lg:block absolute -right-2 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
-                        <ArrowRight className="w-3.5 h-3.5 text-slate-600" />
+                      <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                        <div className="w-6 h-6 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center">
+                          <ArrowRight className="w-3 h-3 text-slate-400" />
+                        </div>
                       </div>
                     )}
                   </button>
@@ -159,15 +144,11 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
             </div>
 
             {/* Selected Step Detail Box */}
-            <div className="mt-8 p-6 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 animate-in fade-in duration-300">
+            <div className="mt-8 p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 animate-in fade-in duration-300">
               <div className="space-y-2 max-w-3xl">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                    ETAPA 0{activeStep + 1} • {flowSteps[activeStep].title}
-                  </span>
-                  <span className="text-xs text-slate-500">|</span>
-                  <span className="text-xs text-slate-400 font-medium">
-                    {flowSteps[activeStep].tag}
+                    ETAPA {flowSteps[activeStep].stepNumber} • {flowSteps[activeStep].title}
                   </span>
                 </div>
                 <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
@@ -176,17 +157,17 @@ export const WhatIsQuark: React.FC<WhatIsQuarkProps> = ({
               </div>
 
               <div className="flex items-center gap-3 shrink-0">
-                {activeStep <= 2 ? (
+                {activeStep <= 1 ? (
                   <button
                     onClick={onOpenQuarkerizeModal}
-                    className="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-colors shadow-md"
+                    className="px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-colors shadow-md cursor-pointer"
                   >
                     Submeter Empreendimento
                   </button>
                 ) : (
                   <button
                     onClick={onOpenInvestorModal}
-                    className="px-4 py-2 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors shadow-md"
+                    className="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors shadow-md cursor-pointer"
                   >
                     Cadastrar como QUARKER
                   </button>

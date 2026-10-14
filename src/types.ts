@@ -19,6 +19,7 @@ export type ProjectStage =
   | 'Operacional';
 
 export type ProjectStatus = 
+  | 'Em Prospecção'
   | 'Em Análise Preliminar'
   | 'Diligência Técnica'
   | 'Em Estruturação'

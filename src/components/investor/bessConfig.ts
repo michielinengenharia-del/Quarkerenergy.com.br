@@ -36,7 +36,7 @@ export const DEFAULT_BESS_CONFIG: BessConfigType = {
 
   assetName: 'QUARK BESS STORAGE 003',
   assetLocation: 'Sorocaba, SP — Polo Industrial Eletrointensivo',
-  nominalCapacity: '10.0 MWh / 5.0 MW',
+  nominalCapacity: '114 kWh / 57,0 kW',
   batteryTechnology: 'LFP (Lítio Ferro Fosfato — Tier 1)',
   targetCOD: 'Previsão COD: 3º Tri / 2027'
 };

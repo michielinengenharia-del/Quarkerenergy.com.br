@@ -61,11 +61,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {cms.heroSubheadline || 'Conectamos projetos de energia, tecnologia e capital para transformar ativos energéticos em oportunidades reais para o futuro.'}
           </p>
 
-          {/* Philosophical Analogy Box */}
-          <div className="max-w-2xl mx-auto py-3 px-6 rounded-2xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-sm text-xs sm:text-sm text-slate-300 flex items-center justify-center gap-3">
-            <span className="text-emerald-400 font-mono font-semibold">QUARK:</span>
-            <span>
-              Quarks formam a matéria. Projetos energéticos formam a nova economia. A QUARK conecta esses elementos.
+          {/* Philosophical Analogy Box / Main Value Proposition */}
+          <div className="max-w-3xl mx-auto py-3.5 px-6 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-sm text-xs sm:text-sm text-slate-300 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 text-center sm:text-left shadow-lg">
+            <span className="text-emerald-400 font-mono font-bold tracking-wider shrink-0 text-sm">QUARK:</span>
+            <span className="leading-relaxed">
+              Conectamos ativos energéticos a investidores, democratizando o acesso às oportunidades que movem o futuro da energia.{' '}
+              <span className="text-white font-semibold">QUARQUERIZE SEU PROJETO OU SE TORNE UM QUARQUER E PARTICIPE DA NOVA ECONOMIA QUE NÃO PARA DE CRESCER.</span>
             </span>
           </div>
 

@@ -1,15 +1,8 @@
 import React from 'react';
 import { 
   Sparkles, 
-  FileText, 
-  SearchCheck, 
-  Compass, 
-  Cpu, 
-  Share2, 
   ArrowRight,
-  CheckCircle,
-  Zap,
-  ShieldCheck
+  Zap
 } from 'lucide-react';
 
 interface QuarkerizeProjectProps {
@@ -21,49 +14,6 @@ export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({
   onOpenModal,
   onNavigateToSeuAtivo 
 }) => {
-  const steps = [
-    {
-      num: '01',
-      title: 'Cadastre',
-      subtitle: 'Apresente seu empreendimento',
-      desc: 'Insira os dados técnicos, localização, potência e documentação preliminar do seu projeto de geração ou armazenamento.',
-      icon: FileText,
-      tag: 'Originação Rápida'
-    },
-    {
-      num: '02',
-      title: 'Avaliamos',
-      subtitle: 'Análise técnica, econômica e riscos',
-      desc: 'Nossa equipe de engenharia e finanças avalia parecer de acesso, licenças ambientais, CAPEX, PPA e calcula o QUARK SCORE.',
-      icon: SearchCheck,
-      tag: 'Diligência Rigorosa'
-    },
-    {
-      num: '03',
-      title: 'Estruturamos',
-      subtitle: 'Estrutura jurídica e econômica',
-      desc: 'Definição do arranjo societário e regulatório customizado para conferir máxima robustez, conformidade e liquidez ao ativo.',
-      icon: Compass,
-      tag: 'Engenharia Financeira'
-    },
-    {
-      num: '04',
-      title: 'Tokenizamos',
-      subtitle: 'Ativos digitais com lastro real',
-      desc: 'Quando aplicável e juridicamente estruturado, direitos econômicos elegíveis são transformados em ativos digitais rastreáveis.',
-      icon: Cpu,
-      tag: 'Digitalização & Blockchain'
-    },
-    {
-      num: '05',
-      title: 'Conectamos',
-      subtitle: 'Acesso a investidores qualificados',
-      desc: 'Apresentamos a oportunidade na plataforma QUARKER para captação de recursos alinhados à transição energética.',
-      icon: Share2,
-      tag: 'Funding Inteligente'
-    }
-  ];
-
   const eligibleAssets = [
     'Usinas Solares Fotovoltaicas',
     'Centrais Geradoras Hidrelétricas (CGH)',
@@ -97,51 +47,6 @@ export const QuarkerizeProject: React.FC<QuarkerizeProjectProps> = ({
           <p className="text-slate-400 text-base sm:text-lg mt-4 leading-relaxed">
             Projetos de geração e armazenamento de energia exigem capital, estruturação, transparência e confiança. A QUARK ENERGY utiliza tecnologia, análise técnica, econômica e critérios ESG para preparar empreendimentos para uma nova forma de acesso ao capital.
           </p>
-        </div>
-
-        {/* 5 Process Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div 
-                key={step.num}
-                className="p-6 rounded-3xl bg-slate-900/50 border border-slate-800/80 hover:border-emerald-500/50 backdrop-blur-sm transition-all flex flex-col justify-between group shadow-xl"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-extrabold font-mono text-emerald-400">
-                      {step.num}
-                    </span>
-                    <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 shadow-neon-emerald group-hover:scale-105 transition-all">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <span className="text-[10px] uppercase font-mono font-semibold tracking-wider text-slate-500 block mb-1">
-                    {step.tag}
-                  </span>
-
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-xs font-semibold text-emerald-300/80 mb-3">
-                    {step.subtitle}
-                  </p>
-
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                  <span className="font-mono text-[10px]">QUARK PROTOCOL</span>
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* Eligible Assets & Interactive Action Box */}

@@ -524,32 +524,86 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
             ))}
           </div>
 
-          {/* Destaque de Ativo Âncora */}
-          <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/90 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
-                <BatteryCharging className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
-                  Ativo Âncora Ativo
-                </span>
-                <h4 className="text-base font-bold text-white mt-0.5">
-                  QUARK BESS STORAGE 003 — Capacidade 10.0 MWh / 5.0 MW
-                </h4>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Polo Industrial Eletrointensivo • Tecnologia LFP Tier-1 • Previsão de Operação 2027
-                </p>
-              </div>
+          {/* Destaque de Ativos em Prospecção */}
+          <div className="mt-12 space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold">
+                Oportunidades em Destaque
+              </span>
+              <span className="h-px flex-1 bg-slate-800"></span>
             </div>
 
-            <button
-              onClick={() => handleOpenPlanModal(PLANS[1])}
-              className="whitespace-nowrap px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all cursor-pointer flex items-center gap-2"
-            >
-              <span>Quero Participar Deste Ativo</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            {/* Ativo 1: QUARK BESS STORAGE 003 */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/90 border border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="flex items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-1 sm:mt-0">
+                  <BatteryCharging className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40">
+                      Ativo Âncora em Prospecção
+                    </span>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
+                      Rentabilidade Projetada 1,50% a.m.
+                    </span>
+                  </div>
+                  <h4 className="text-base font-bold text-white mt-1.5">
+                    QUARK BESS STORAGE 003 — Capacidade 114 kWh / 57,0 kW
+                  </h4>
+                  <p className="text-xs text-slate-300 mt-1 font-medium">
+                    RENTABILIDADE PROJETADA 1,50%a.m. • CRONOGRAMA ALVO DE OPERAÇÃO: 06 A 12 MESES.
+                  </p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Polo Industrial Eletrointensivo • Tecnologia LFP Tier-1 • Arbitragem Tarifária & Segurança Energética
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleOpenPlanModal(PLANS[1])}
+                className="whitespace-nowrap px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
+              >
+                <span>Quero Participar Deste Ativo</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Ativo 2: QUARK ESTAÇÃO DE RECARGA VE 004 */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="flex items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-1 sm:mt-0">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[11px] font-mono text-emerald-400 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
+                      Ativo em Prospecção
+                    </span>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
+                      Rentabilidade Projetada 1,5% a.m.
+                    </span>
+                  </div>
+                  <h4 className="text-base font-bold text-white mt-1.5">
+                    QUARK ESTAÇÃO DE RECARGA VE 004 — 40,0 kW CC
+                  </h4>
+                  <p className="text-xs text-slate-300 mt-1 font-medium">
+                    RENTABILIDADE PROJETADA 1,5%a.m. • CRONOGRAMA ALVO DE OPERAÇÃO: 06 A 12 MESES.
+                  </p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Infraestrutura de Eletromobilidade • Recarga Ultrarrápida em Corrente Contínua (CC) • Hub Estratégico
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleOpenPlanModal(PLANS[0])}
+                className="whitespace-nowrap px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
+              >
+                <span>Quero Participar Deste Ativo</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
         </div>
@@ -635,6 +689,36 @@ export const InvestorLandingPage: React.FC<InvestorLandingPageProps> = ({
               >
                 Ver Planos Novamente
               </button>
+            </div>
+          </div>
+
+          {/* =========================================================================
+              POLÍTICA DE LIQUIDEZ E SAÍDA ANTECIPADA (DISCRETO AO FINAL DA PÁGINA)
+              ========================================================================= */}
+          <div className="mt-20 pt-8 border-t border-slate-900/80 max-w-3xl mx-auto">
+            <div className="p-5 sm:p-6 rounded-xl bg-slate-950/40 border border-slate-900/80 text-left">
+              <h5 className="text-xs font-semibold text-slate-400 font-mono uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                Política de Liquidez e Saída Antecipada — QuarkEnergy
+              </h5>
+              
+              <div className="space-y-2 text-[11px] sm:text-xs text-slate-400 leading-relaxed font-sans">
+                <p>
+                  Durante a fase de desenvolvimento e implantação do projeto BESS, o investidor poderá solicitar a transferência ou alienação de sua participação, observadas as condições contratuais e regulatórias aplicáveis.
+                </p>
+                <p>
+                  A QuarkEnergy poderá auxiliar na identificação de investidores substitutos e na organização de oportunidades de transferência de participação, sem garantir a existência de comprador, o prazo de liquidação ou a recuperação integral do capital investido.
+                </p>
+                <p>
+                  Quando houver previsão contratual específica, poderão ser utilizados mecanismos complementares de liquidez, como reservas financeiras, pagamentos parcelados ou opções de recompra por partes habilitadas e financeiramente aptas.
+                </p>
+                <p>
+                  Os procedimentos deverão definir critérios de avaliação da participação, prazos de processamento, condições de pagamento, prioridades entre solicitações e tratamento de situações excepcionais.
+                </p>
+                <p className="text-slate-500 pt-1 border-t border-slate-900/60">
+                  A saída antecipada não implicará automaticamente a restituição integral e imediata do capital, salvo quando houver obrigação contratual ou legal aplicável.
+                </p>
+              </div>
             </div>
           </div>
 
